@@ -1,5 +1,3 @@
----
-
 # Chinese Auction Web App
 
 This project was developed as a modern, user-friendly web application for managing and participating in Chinese auctions. It is built with Angular for the front-end and integrates seamlessly with a C# .NET backend, providing a scalable and efficient solution.
@@ -36,20 +34,18 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 ## Key Features
 
-* **Built with Angular**
+* **Built with Angular**  
   The front-end is developed in Angular, utilizing advanced features like components, services, reactive forms, routing, and animations to create a seamless and dynamic user experience.
 
-* **Real-Time Raffle Draw**
+* **Real-Time Raffle Draw**  
   Participate in live raffle draws that enhance interactivity and excitement.
 
-* **C# .NET Backend**
+* **C# .NET Backend**  
   The backend is powered by C# .NET and communicates with the front-end via Web API for user registration, login, and item management.
 
-* **Component-Based Architecture**
+* **Component-Based Architecture**  
   The project follows clean code principles, featuring reusable components, centralized state management, and a clear separation of concerns.
 
 ## Further help
 
 For more information and guidance on Angular development, refer to the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-
----

@@ -1,0 +1,126 @@
+<div class="card">
+    <p-toast />
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <p-button severity="success" label="New" icon="pi pi-plus" class="mr-2" (onClick)="openNew()" />
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="donorlist" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+        [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="selectedDonors" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox />
+                </th>
+                <th pSortableColumn="name" style="min-width:15rem">
+                    Name <p-sortIcon field="name" />
+                </th>
+                <th pSortableColumn="City" style="min-width:10rem">
+                    City <p-sortIcon field="City" />
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-donor>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="donor" />
+                </td>
+                <td>
+                    {{ donor.name }}
+                </td>
+                <td>
+                    {{ donor.city }}
+                </td>
+
+                <td>
+                    <p-button id="edit" icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true"
+                        severity="success" (onClick)="editDonor(donor)" />
+                    <p-button id="delete" icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true"
+                        (onClick)="deleteDonor(donor)" />
+                    <p-button id="show" icon="pi pi-gift" severity="info" [rounded]="true" [outlined]="true" label="Show Gifts"
+                        (onClick)="showGifts(donor)" />
+                </td>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{ donorlist ? donorlist.length : 0 }} donors.
+            </div>
+        </ng-template>
+    </p-table>
+
+    <p-dialog [(visible)]="donorDialog" [style]="{ width: '450px' }" header="Donor Details" [modal]="true"
+        styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="field">
+                <label for="name">Name</label>
+                <input (input)="checkUniqueName()" type="text" pInputText id="name" [(ngModel)]="donor.name" required
+                    autofocus />
+                <small class="p-error" *ngIf="submitted && !donor.name">
+                    Name is required.
+                </small>
+                <small class="p-error" *ngIf="errorMessage">{{ errorMessage }}</small>
+            </div>
+            <div class="field">
+                <label for="city">City</label>
+                <input type="text" pInputText id="donor" [(ngModel)]="donor.city" required />
+                <small class="p-error" *ngIf="submitted && !donor.city">
+                    City is required.
+                </small>
+            </div>
+
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+            <p-button label="Cancel" icon="pi pi-times" [text]="true" (onClick)="hideDialog()" />
+            <p-button label="Save" icon="pi pi-check" [text]="true" (onClick)="saveDonor()"
+                [disabled]="errorMessage || !donor.name?.trim() || !donor.city?.trim()" />
+
+        </ng-template>
+    </p-dialog>
+
+
+
+
+</div>
+
+
+<p-dialog [(visible)]="giftsDialog" [style]="{ width: '700px' }" header="Gifts" [modal]="true">
+    <ng-template pTemplate="content">
+        <div class="grid grid-nogutter" >
+            <div class="col-12 md:col-6 lg:col-4" *ngFor="let gift of selectedGifts">
+                <p-card [header]="gift.name || 'No Name'" [subheader]="'Gift Number: ' + (gift.number || 'N/A')">
+                    <ng-template pTemplate="header">
+                        <div class="image-container">
+                            <img
+                                *ngIf="gift.imageUrl"
+                                [src]="gift.imageUrl"
+                                alt="{{ gift.name }}"
+                                class="gift-image"
+                            />
+                            <img
+                                *ngIf="!gift.imageUrl"
+                                src="https://via.placeholder.com/150"
+                                alt="Placeholder image"
+                                class="gift-image"
+                            />
+                        </div>
+                    </ng-template>
+                    <div class="gift-info">
+                        <p><strong>Ticket Price:</strong> ${{ gift.ticketPrice }}</p>
+                    </div>
+                    <ng-template pTemplate="footer">
+                        <button pButton label="More Info" icon="pi pi-info-circle" (click)="viewGiftDetails(gift)" class="p-button-sm"></button>
+                    </ng-template>
+                </p-card>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog></p-confirmDialog>

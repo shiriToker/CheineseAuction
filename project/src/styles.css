@@ -1,0 +1,34 @@
+/* עיצוב האינפוט */
+.p-inputnumber input {
+  height: 2.5rem;
+  width: 2.5rem;
+  text-align: center;
+  border: 1px solid #eaeaea; /* צבע אפור בהיר */
+  color: #464646 !important; /* אייקונים אפורים */
+  border-right: none;
+  font-size: 0.9rem;
+}
+
+/* עיצוב הכפתורים */
+.p-inputnumber .p-inputnumber-button {
+  background-color: #d7d7d7 !important; /* צבע אפור בהיר */
+  border: 1px solid #b5b5b5 !important; /* מסגרת אפורה */
+  color: #767676 !important; /* אייקונים אפורים */
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 0 !important; /* אין עיגול */
+}
+
+.p-inputnumber .p-inputnumber-button.p-inputnumber-button-up {
+  border-top: none !important; /* הכפתור העליון */
+  border-top-right-radius: 50% !important;
+  border-bottom-right-radius: 50% !important;
+
+}
+
+.p-inputnumber .p-inputnumber-button.p-inputnumber-button-down {
+  border-top: none !important; /* הכפתור התחתון */
+  border-bottom-left-radius: 50% !important;
+  border-top-left-radius: 50% !important;
+
+}

@@ -1,0 +1,57 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Cursive', sans-serif;
+    background-image: url('/assets/home.jpg');
+    background-size: 100% 100%; /* התמונה תותאם גם לרוחב וגם לגובה */
+    background-position: center; /* ממרכז את התמונה */
+    background-repeat: no-repeat; /* מונע חזרה על התמונה */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* הגובה יותאם לגובה המסך */
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* שכבה כהה למחצה כדי להבליט את הטקסט */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 60%; /* ניתן להתאים את הרוחב */
+}
+
+.title {
+    font-size: 4em;
+    color: #ffffff; 
+    font-weight: bold;
+    text-shadow: 2px 2px 5px black;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid white; /* הוספת סמן קו */
+    animation: typing 6s steps(40, end) infinite; /* מחזור אנימציה לכתיבה והעלמות */
+    max-width: 100%; 
+    width: 0;
+    opacity: 1;
+}
+
+.great-vibes-regular {
+    font-family: "Great Vibes", serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+@keyframes typing {
+    0% { width: 1ch; opacity: 1; } /* התחלה עם רוחב של תו אחד */
+    5% { width: 1ch; } /* השארת רוחב קטן בתחילת האנימציה */
+    60% { width: 100%; opacity: 1; } /* כתיבה */
+    80% { width: 100%; opacity: 0; } /* השהיה */
+    100% { width: 0; opacity: 0; } /* העלמות */
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}

@@ -1,0 +1,56 @@
+<body>
+  <div class="container">
+    <!-- כפתור ההגרלה -->
+    <div class="button-container" *ngIf="!isButtonClicked && !hasLotteryRun">
+      <button class="animated-button" (click)="generateLottery()">
+        Generate Lottery
+      </button>
+    </div>
+
+    <!-- ספירה לאחור -->
+    <div class="countdown-container" *ngIf="countdown !== null">
+      <h1 class="countdown">{{ countdown }}</h1>
+    </div>
+
+    <!-- גלגל מזל -->
+    <div class="lotto-wheel-container" *ngIf="isSpinning">
+      <div class="lotto-wheel"></div>
+    </div>
+
+    <!-- קרוסלה של הזוכים -->
+    <div class="caruoselContainer" *ngIf="winners.length > 0">
+      <p-carousel 
+        [value]="winners" 
+        [numVisible]="4" 
+        [numScroll]="4" 
+        [circular]="true" 
+        [responsiveOptions]="responsiveOptions"
+        autoplayInterval="3000">
+        <ng-template let-winner pTemplate="item">
+          <div class="border-1 surface-border border-round m-2 p-3 carousel-item">
+            <div class="mb-3">
+              <div class="relative mx-auto">
+                <img 
+                  [src]="'.' + winner.giftImg" 
+                  [alt]="winner.giftName" 
+                  class="border-round carousel-image" />
+              </div>
+            </div>
+            <div class="mb-3 font-medium">
+              <p>
+                <strong>{{ winner.winner.fullname }}</strong> 
+                won a <strong>{{ winner.giftName }}</strong>
+              </p>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+
+    <!-- הודעה במקרה שאין זוכים -->
+    <div *ngIf="winners.length === 0 && countdown === null && !isSpinning && hasLotteryRun" class="no-winners">
+      No winners yet.
+    </div>
+  </div>
+</body>
+<p-toast></p-toast>

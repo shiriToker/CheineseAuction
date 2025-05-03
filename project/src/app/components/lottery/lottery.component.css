@@ -1,0 +1,118 @@
+html, body {
+  height: 100vh; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  font-family: 'Cursive', sans-serif;
+  background-image: url('/assets/home.jpg');
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.container{
+  position: relative;
+  
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.lotto-wheel {
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #3498db; 
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite; 
+  margin: 0 auto;
+  display: block;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+}
+
+.animated-button {
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff6f61, #ffcc00, #33cc33, #00ccff, #9933ff);
+  background-size: 300% 300%;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: rainbow-colors 3s linear infinite;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.animated-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes rainbow-colors {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.no-winners {
+  text-align: center;
+  font-size: 1.5rem;
+  color: gray;
+  margin-top: 2rem;
+}
+
+.countdown-container {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.countdown {
+  font-size: 6rem; 
+  color: rgb(255, 100, 172); /* כחול */
+  font-weight: bold;
+  animation: none; /* בלי אנימציה */
+  display: inline-block;
+}
+
+.carousel-image {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.carousel-item {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  text-align: center;
+  background-color: aliceblue;
+}
+
+.caruoselContainer {
+  margin-top: 150px;
+  max-width: 100vw;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin: 4rem auto;
+  padding: 2rem;
+  width: 100%;
+}

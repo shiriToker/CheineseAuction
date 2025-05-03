@@ -1,0 +1,192 @@
+<div class="card">
+    <p-toast />
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <p-button
+                severity="success" 
+                label="New" 
+                icon="pi pi-plus" 
+                class="mr-2" 
+                (onClick)="openNew()" />
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="giftlist"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [(selection)]="selectedGifts"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+    >
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 4rem; text-align: center;">
+                <p-tableHeaderCheckbox />
+            </th>
+            <th pSortableColumn="price" style="text-align: center;">
+                Number <p-sortIcon field="number" />
+            </th>
+            <th pSortableColumn="name" style="min-width:15rem; text-align: center;">
+                Name <p-sortIcon field="name" />
+            </th>
+            <th pSortableColumn="price" style="text-align: center;">
+                TicketPrice <p-sortIcon field="price" />
+            </th>
+            <th pSortableColumn="donor" style="min-width:10rem; text-align: center;">
+                Donor <p-sortIcon field="donor" />
+            </th>
+            <th style="text-align: center;">
+                Image
+            </th>
+            <th style="text-align: center;"></th>
+        </tr>
+    </ng-template>
+    
+
+        <ng-template pTemplate="body" let-gift>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="gift" />
+                </td>
+                <td>
+                    {{ gift.number }}
+                </td>
+                <td>
+                    {{ gift.name }}
+                </td>
+                <td>
+                    {{ gift.ticketPrice | currency : 'USD' }}
+                </td>
+                <td>
+                    {{ gift.donor }}
+                </td>
+                <td>
+                    <img class="shadow-4" *ngIf="gift.imageUrl" [src]="gift.imageUrl" alt="{{ gift.name }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px; margin-bottom: -8px; margin-top: -6px;">
+                </td>
+                <td>
+                    <p-button 
+                        id="edit"
+                        icon="pi pi-pencil" 
+                        class="mr-2" 
+                        [rounded]="true" 
+                        [outlined]="true" 
+                        severity="success" 
+                        (onClick)="editGift(gift)" />
+                    <p-button 
+                        id="delete"
+                        icon="pi pi-trash" 
+                        severity="danger" 
+                        [rounded]="true" 
+                        [outlined]="true" 
+                        (onClick)="deleteGift(gift)" />
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{ giftlist ? giftlist.length : 0 }} gifts.
+            </div>
+        </ng-template>
+    </p-table>
+
+    <p-dialog 
+        [(visible)]="giftDialog" 
+        [style]="{ width: '450px' }" 
+        header="Gift Details" 
+        [modal]="true" 
+        styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="field">
+                <label for="name">Name</label>
+                <input
+                    (input)="checkUniqueName()" 
+                    type="text" 
+                    pInputText 
+                    id="name" 
+                    [(ngModel)]="gift.name" 
+                    required 
+                    autofocus />
+                <small class="p-error" *ngIf="submitted && !gift.name">
+                    Name is required.
+                </small>
+                <small class="p-error" *ngIf="errorMessage">{{ errorMessage }}</small>
+            </div>
+
+            <div class="field">
+                <label for="donor">Donor</label>
+                <p-dropdown 
+                    [options]="donorList" 
+                    [(ngModel)]="gift.donor" 
+                    optionLabel="name" 
+                    optionValue="value"
+                    placeholder="Select a Donor" 
+                    [showClear]="true"
+                    required>
+                </p-dropdown>
+                <small class="p-error" *ngIf="submitted && !gift.donor">
+                    Donor is required.
+                </small>
+            </div>
+
+            <div class="formgrid grid">
+                <div class="field col">
+                    <label for="price">Price</label>
+                    <p-inputNumber 
+                        id="price" 
+                        [(ngModel)]="gift.ticketPrice" 
+                        mode="currency" 
+                        currency="USD" 
+                        locale="en-US" 
+                        required />
+                    <small class="p-error" *ngIf="submitted && !gift.ticketPrice">
+                        Price is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="imageUrl">Image URL</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="imageUrl"
+                    [(ngModel)]="gift.imageUrl"
+                    placeholder="Enter Image URL"
+                    required />
+                <small class="p-error" *ngIf="submitted && !gift.imageUrl">
+                    Image URL is required.
+                </small>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+            <p-button 
+                label="Cancel" 
+                icon="pi pi-times" 
+                [text]="true" 
+                (onClick)="hideDialog()" />
+            <p-button
+                label="Save" 
+                icon="pi pi-check" 
+                [text]="true" 
+                (onClick)="saveGift()" 
+                [disabled]="errorMessage || !gift.name?.trim() || !gift.donor?.trim() || !gift.imageUrl?.trim() || !gift.ticketPrice || !gift.imageUrl"
+            />
+        </ng-template>
+    </p-dialog>
+
+    <p-confirmDialog [style]="{ width: '450px' }" />
+</div>
+
+
+
+
+
+

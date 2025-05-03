@@ -1,0 +1,77 @@
+.payment-form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* מתחיל מהחלק העליון של המסך */
+    padding: 20px; /* הוסף רווח פנימי סביב הטופס */
+    max-width: 100%;
+    box-sizing: border-box; /* כולל את ה-padding בתוך החישוב של הרוחב */
+    margin: 0 auto; /* מרכז את הטופס */
+}
+
+.payment-icons i:hover {
+    filter: brightness(1.2); 
+    transition: filter 0.3s ease;
+    color: #fefae9;
+}
+
+
+p-card {
+    width: 400px;
+    text-align: center;
+}
+
+.form-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.form-field i {
+    font-size: 1.2rem;
+    color: #007ad9;
+}
+
+p-inputMask,
+p-calendar,
+input {
+    flex: 1;
+}
+
+label {
+    font-weight: bold;
+    flex: 1;
+    text-align: left;
+}
+
+.credit-card-icons {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 2rem;
+    color: #007ad9;
+}
+.form-field {
+    display: flex;
+    flex-direction: column; /* מסדר את תוכן השדה בטור */
+    align-items: flex-start; /* ממקם את הכל בצד שמאל */
+    margin-bottom: 16px;
+}
+
+small.p-error {
+    color: #e74c3c; /* צבע אדום להדגשת שגיאה */
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    margin-top: 4px; /* רווח קטן בין האינפוט להערה */
+}
+
+small.p-error::before {
+    content: "\f071"; /* אייקון אזהרה */
+    font-family: "Font Awesome 5 Free"; /* חובה להגדיר את זה */
+    font-weight: 900; /* עובי לאייקון */
+    margin-right: 6px; /* רווח בין האייקון לטקסט */
+    color: #e74c3c;
+    font-size: 1rem; /* גודל האייקון */
+}

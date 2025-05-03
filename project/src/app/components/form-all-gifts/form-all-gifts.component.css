@@ -1,0 +1,15 @@
+:host ::ng-deep .p-dialog .product-image {
+  width: 150px;
+  margin: 0 auto 2rem auto;
+  display: block;
+}
+
+th,
+td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+#edit, #delete{
+  margin: 3px;
+}

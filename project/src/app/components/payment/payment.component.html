@@ -1,0 +1,82 @@
+<form [formGroup]="payForm" dir="ltr" class="payment-form">
+    <p-card header="Payment Form">
+        <h3>Total Amount: {{ sum | currency:'USD':'symbol':'1.2-2' }}</h3>
+
+        <div class="form-field">
+            <i class="pi pi-credit-card"></i>
+            <label for="card number">Card Number</label>
+            <p-inputMask mask="9999-9999-9999-9999" formControlName="cardNumber" id="cardNumberInput"
+                placeholder="xxxx-xxxx-xxxx-xxxx" slotChar="xxxx-xxxx-xxxx-xxxx" />
+            <small class="p-error" *ngIf="payForm.get('cardNumber')?.invalid && payForm.get('cardNumber')?.touched">
+                Card Number is invalid.
+            </small>
+        </div>
+
+        <div class="form-field">
+            <i class="pi pi-lock"></i>
+            <label for="cvv number">CVV Number</label>
+            <p-inputMask mask="999" formControlName="cvv" id="cvvInput" placeholder="xxx" slotChar="xxx" />
+            <small class="p-error" *ngIf="payForm.get('cvv')?.invalid && payForm.get('cvv')?.touched">
+                CVV is required and must be 3 digits.
+            </small>
+        </div>
+
+        <div class="form-field">
+            <i class="pi pi-calendar"></i>
+            <label for="validity">Validity Date</label>
+            <p-calendar [iconDisplay]="'input'" [minDate]="nextMonth" [showIcon]="true" view="month" dateFormat="mm/y"
+                [readonlyInput]="true" formControlName="validity" id="validityInput" />
+            <small class="p-error" *ngIf="payForm.get('validity')?.invalid && payForm.get('validity')?.touched">
+                Validity is invalid.
+            </small>
+        </div>
+
+        <div class="form-field">
+            <i class="pi pi-sort-numeric-up"></i>
+            <label for="payments">Payments</label>
+            <p-inputMask mask="9" formControlName="payments" id="paymentsInput" placeholder="1-9" slotChar="" />
+            <small class="p-error" *ngIf="payForm.get('payments')?.invalid && payForm.get('payments')?.touched">
+                Payment is invalid.
+            </small>
+        </div>
+
+        <div class="form-field">
+            <i class="pi pi-user"></i>
+            <label for="name">Full Name</label>
+            <input pInputText formControlName="fullName" id="nameInput" [maxLength]="20" />
+            <small class="p-error" *ngIf="payForm.get('fullName')?.invalid && payForm.get('fullName')?.touched">
+                Full name is required.
+            </small>
+        </div>
+
+        <div class="form-field">
+            <i class="pi pi-envelope"></i>
+            <label for="email">Email</label>
+            <input type="email" pInputText formControlName="email" id="emailInput" [maxLength]="30" />
+            <small class="p-error" *ngIf="payForm.get('email')?.invalid && payForm.get('email')?.touched">
+                Must be a valid email.
+            </small>
+        </div>
+
+        <div class="form-field">
+            <i class="pi pi-phone"></i>
+            <label for="phone">Phone Number</label>
+            <p-inputMask mask="999-9999999" formControlName="phone" id="phoneInput" placeholder="000-0000000"
+                slotChar="000-0000000" />
+            <small class="p-error" *ngIf="payForm.get('phone')?.invalid && payForm.get('phone')?.touched">
+                Phone number is required and must be min 10 digits.
+            </small>
+        </div>
+
+        <div class="field">
+            <p-button [disabled]="!payForm.valid" label="Submit Payment" icon="pi pi-check" type="submit"
+                (onClick)="submit()"></p-button>
+        </div>
+        <div class="credit-card-icons">
+            <i class="fab fa-cc-visa" title="Visa"></i>
+            <i class="fab fa-cc-mastercard" title="MasterCard"></i>
+            <i class="fas fa-credit-card" title="CreditCard"></i>
+            <i class="fab fa-cc-discover" title="Discover"></i>
+        </div>
+    </p-card>
+</form>

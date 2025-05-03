@@ -1,0 +1,37 @@
+<p-toast></p-toast>
+<p-card [ngStyle]="{'top': '30px' ,'position': 'relative'}">
+    <h2 style="display: inline;">Total price: {{getTotalPrice()}}$</h2>
+    <p-button label="Buy now!" severity="success"
+    (onClick)="paymant()"  [ngStyle]="{'right': '-43vw' ,'position': 'relative'}"/>
+    <p-divider type="solid" />
+    <div class="card">
+        <p-table [value]="cart" [tableStyle]="{'min-width': '60rem', 'position': 'relative', 'top': '-15px'}"> 
+            <ng-template pTemplate="body" let-gift>
+                <tr class="font-semibold text-lg">
+                    <td >{{gift.gift.name}}</td>
+                    <td><img [src]="gift.gift.imageUrl" [alt]="gift.gift.name" width="100" class="shadow-4 border-round" /></td>
+                    <td>{{gift.gift.ticketPrice | currency:'USD'}}</td>
+                    <td>
+                        <div class="card flex justify-content-center">
+                            <p-inputNumber 
+                                [(ngModel)]="gift.quantity" 
+                                [showButtons]="true" 
+                                buttonLayout="horizontal"
+                                spinnerMode="horizontal" 
+                                inputId="horizontal" 
+                                incrementButtonIcon="pi pi-plus" 
+                                decrementButtonIcon="pi pi-minus"
+                                (ngModelChange)="updateQuantity(gift, $event)"
+                                />
+                        </div>
+                </tr>
+
+            </ng-template>
+          
+        </p-table>
+        <h3 style="display: inline;">In total there are {{quantity}} gifts.</h3>
+
+    </div>
+
+</p-card>
+
